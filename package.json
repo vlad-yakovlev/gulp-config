@@ -1,7 +1,7 @@
 {
     "dependencies": {
         "gulp": "3",
-        "gulp-simple": "0",
+        "gulp-simple": "1",
         "minimist": "1",
 
         "gulp-autoprefixer": "3",
