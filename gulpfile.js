@@ -17,6 +17,7 @@ gulp.task('server', callback => {
                 fn: snippet => snippet,
             },
         },
+        notify: false,
         logLevel: "silent",
         port: 8000,
     }, callback);
