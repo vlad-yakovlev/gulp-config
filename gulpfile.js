@@ -3,20 +3,34 @@
 const gulp = require('gulp');
 const runSequence = require('run-sequence');
 const minimist = require('minimist');
+const browserSync = require('browser-sync').create();
 
-require('gulp-simple')(require('./gulp-config'), {
+const config = require('./gulp-config');
+
+gulp.task('server', callback => {
+	browserSync.init({
+        server: config.dest,
+        logLevel: "silent",
+        port: 8000,
+    }, callback);
+});
+
+require('gulp-simple')(config, {
+	prefix: 'source_',
     minify: minimist(process.argv.slice(2)).release,
+    onWatch: browserSync.reload,
 });
 
 gulp.task('default', callback => runSequence(
-    'gulp-simple-clean',
-    'gulp-simple-build',
+    'source_clean',
+    'source_build',
     callback
 ));
 
 gulp.task('watch', callback => runSequence(
-    'gulp-simple-clean',
-    'gulp-simple-build',
-    'gulp-simple-watch',
+    'source_clean',
+    'source_build',
+    'server',
+    'source_watch',
     callback
 ));
